@@ -5,12 +5,19 @@ import { Button } from "@/components/ui/button"
 import { 
   ArrowRight, BookOpen, Brain, Layers, Lightbulb, Sparkles, 
   UserCheck, ChevronRight, Star, Menu, X, Github, Twitter, 
-  Linkedin, Check, MessageSquare 
+  Linkedin, Check, MessageSquare, Sun, Moon 
 } from "lucide-react"
-import { useState } from "react"
+import { useState, useEffect } from "react"
+import { useTheme } from "next-themes"
 
 export default function LandingPage() {
   const [mobileMenuOpen, setMobileMenuOpen] = useState(false);
+  const { theme, setTheme } = useTheme();
+  const [mounted, setMounted] = useState(false);
+
+  useEffect(() => {
+    setMounted(true);
+  }, []);
 
   return (
     <div className="flex flex-col min-h-screen">
@@ -39,6 +46,20 @@ export default function LandingPage() {
               </div>
             </div>
             <div className="hidden md:flex items-center space-x-4">
+              <Button
+                variant="ghost"
+                size="icon"
+                onClick={() => setTheme(theme === "dark" ? "light" : "dark")}
+                className="h-9 w-9 rounded-lg"
+              >
+                {mounted && (
+                  theme === "dark" ? (
+                    <Sun className="h-4 w-4 text-slate-600 dark:text-slate-300" />
+                  ) : (
+                    <Moon className="h-4 w-4 text-slate-600 dark:text-slate-300" />
+                  )
+                )}
+              </Button>
               <Link href="/login">
                 <Button variant="outline" size="sm">Log in</Button>
               </Link>
