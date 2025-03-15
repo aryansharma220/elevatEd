@@ -1,8 +1,6 @@
 "use client"
 
-import type React from "react"
-
-import { useState, useEffect } from "react"
+import { useState } from "react"
 import { Button } from "@/components/ui/button"
 import { Card } from "@/components/ui/card"
 import { Input } from "@/components/ui/input"
@@ -15,7 +13,6 @@ import { Loader2, ArrowRight, Sparkles } from "lucide-react"
 import { useRouter } from "next/navigation"
 import { generateCourseSyllabus } from "@/lib/course-generator"
 import { NavHeader } from "@/components/nav-header"
-import { AddEnvironmentVariables } from "@/components/add-environment-variables"
 
 export default function CreateCoursePage() {
   const router = useRouter()
@@ -26,20 +23,15 @@ export default function CreateCoursePage() {
   const [paceValue, setPaceValue] = useState([2]) // 1-3: Slow, Medium, Fast
   const [includeQuizzes, setIncludeQuizzes] = useState(true)
   const [includeExercises, setIncludeExercises] = useState(true)
-  const [includeMultimedia, setIncludeMultimedia] = useState(true)
   const [loading, setLoading] = useState(false)
   const [error, setError] = useState("")
-  const [hasApiKey, setHasApiKey] = useState(false)
-
-  useEffect(() => {
-    // Check if API key exists in localStorage
-    const apiKey = localStorage.getItem("GEMINI_API_KEY")
-    setHasApiKey(!!apiKey)
-  }, [])
 
   const handleSubmit = async (e: React.FormEvent) => {
     e.preventDefault()
-    if (!topic) {
+    
+    // Validate input
+    const trimmedTopic = topic.trim()
+    if (!trimmedTopic) {
       setError("Please enter a course topic")
       return
     }
@@ -49,51 +41,35 @@ export default function CreateCoursePage() {
 
     try {
       const courseId = await generateCourseSyllabus({
-        topic,
-        description,
+        topic: trimmedTopic,
+        description: description.trim(),
         knowledgeLevel,
         learningStyle,
         pace: paceValue[0],
         includeQuizzes,
         includeExercises,
-        includeMultimedia,
+        includeMultimedia: false, // Always set to false since we don't support images
       })
 
+      if (!courseId) {
+        throw new Error("No course ID returned")
+      }
+
+      // Redirect to the course page
       router.push(`/course/${courseId}`)
     } catch (err) {
       console.error("Error generating course:", err)
-      setError("Failed to generate course. Please try again.")
+      setError(
+        err instanceof Error 
+          ? err.message 
+          : "Failed to generate course. Please try again."
+      )
+    } finally {
       setLoading(false)
     }
   }
 
   const paceLabels = ["Slow", "Medium", "Fast"]
-
-  if (!hasApiKey) {
-    return (
-      <div className="min-h-screen bg-gradient-to-b from-violet-50 to-white dark:from-slate-950 dark:to-slate-900">
-        <NavHeader />
-        <div className="container mx-auto px-4 py-12">
-          <div className="max-w-3xl mx-auto">
-            <div className="text-center mb-10">
-              <div className="inline-flex items-center px-3 py-1 rounded-full bg-purple-100 dark:bg-purple-900/30 text-purple-800 dark:text-purple-300 text-sm font-medium mb-2">
-                <Sparkles className="h-4 w-4 mr-2" />
-                Powered by Google Gemini
-              </div>
-              <h1 className="text-3xl md:text-4xl font-bold tracking-tight text-slate-900 dark:text-white mb-4">
-                Set Up Your API Key
-              </h1>
-              <p className="text-lg text-slate-600 dark:text-slate-300 mb-8">
-                To generate AI courses with Gemini, you'll need to provide your API key.
-              </p>
-            </div>
-
-            <AddEnvironmentVariables onComplete={() => setHasApiKey(true)} />
-          </div>
-        </div>
-      </div>
-    )
-  }
 
   return (
     <div className="min-h-screen bg-gradient-to-b from-violet-50 to-white dark:from-slate-950 dark:to-slate-900">
@@ -234,13 +210,6 @@ export default function CreateCoursePage() {
                         Include Exercises
                       </Label>
                       <Switch id="exercises" checked={includeExercises} onCheckedChange={setIncludeExercises} />
-                    </div>
-
-                    <div className="flex items-center justify-between">
-                      <Label htmlFor="multimedia" className="text-base cursor-pointer">
-                        Include Multimedia Content
-                      </Label>
-                      <Switch id="multimedia" checked={includeMultimedia} onCheckedChange={setIncludeMultimedia} />
                     </div>
                   </div>
                 </div>

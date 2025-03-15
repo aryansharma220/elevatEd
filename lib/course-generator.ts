@@ -5,11 +5,24 @@ import { GoogleGenerativeAI, HarmCategory, HarmBlockThreshold } from "@google/ge
 import type { CourseData, CourseGenerationParams, SectionGenerationParams, QuestionParams, Section } from "@/lib/types"
 
 // Initialize the Google Generative AI with your API key
-// In a real application, this would be stored in an environment variable
-const genAI = new GoogleGenerativeAI(process.env.GEMINI_API_KEY || "YOUR_API_KEY")
+const GEMINI_API_KEY = process.env.GEMINI_API_KEY
 
-// Mock database to store courses
-const courseDatabase = new Map<string, CourseData>()
+if (!GEMINI_API_KEY) {
+  throw new Error("GEMINI_API_KEY environment variable is not set")
+}
+
+const genAI = new GoogleGenerativeAI(GEMINI_API_KEY)
+
+// Create a more persistent storage solution using global scope
+let globalCourseDatabase: Map<string, CourseData>;
+
+// Initialize the database if it doesn't exist
+if (typeof global.courseDatabase === 'undefined') {
+  global.courseDatabase = new Map<string, CourseData>();
+  globalCourseDatabase = global.courseDatabase;
+} else {
+  globalCourseDatabase = global.courseDatabase;
+}
 
 export async function generateCourseSyllabus(params: CourseGenerationParams): Promise<string> {
   const courseId = uuidv4()
@@ -20,9 +33,9 @@ export async function generateCourseSyllabus(params: CourseGenerationParams): Pr
   }
 
   try {
-    // Configure the model
+    // Configure the model with safety settings
     const model = genAI.getGenerativeModel({
-      model: "gemini-pro",
+      model: "gemini-2.0-flash", // Updated model name
       safetySettings: [
         {
           category: HarmCategory.HARM_CATEGORY_HARASSMENT,
@@ -43,36 +56,34 @@ export async function generateCourseSyllabus(params: CourseGenerationParams): Pr
       ],
     })
 
-    // Create the prompt
+    // Create a more structured prompt for better results
     const prompt = `
-    You are an expert educational content creator specializing in creating comprehensive, well-structured courses.
+    You are an expert educational content creator. Create a detailed course outline in JSON format.
     
-    Create a comprehensive course on "${params.topic}".
-    ${params.description ? `Additional details: ${params.description}` : ""}
+    Topic: "${params.topic}"
+    ${params.description ? `Additional Context: ${params.description}` : ''}
+    Level: ${difficultyMap[params.knowledgeLevel]}
+    Learning Style: ${params.learningStyle}
+    Pace: ${params.pace === 1 ? "Slower" : params.pace === 2 ? "Moderate" : "Faster"}
     
-    The course should be at a ${difficultyMap[params.knowledgeLevel]} level.
-    The learning style should be ${params.learningStyle}.
-    The pace should be ${params.pace === 1 ? "slow" : params.pace === 2 ? "medium" : "fast"}.
-    ${params.includeQuizzes ? "Include quizzes for each section." : "Do not include quizzes."}
-    ${params.includeExercises ? "Include practical exercises for each section." : "Do not include exercises."}
-    ${params.includeMultimedia ? "Include references to multimedia content." : "Do not include multimedia content."}
+    Include:
+    - 3-5 modules with clear objectives
+    - 2-4 lessons per module
+    - 2-4 sections per lesson
+    ${params.includeQuizzes ? "- Quiz sections for assessment" : ""}
+    ${params.includeExercises ? "- Practical exercises" : ""}
+    ${params.includeMultimedia ? "- References to multimedia content" : ""}
     
-    The course should have 3-5 modules, each with 2-4 lessons.
-    Each lesson should have 2-4 sections.
-    
-    Provide a detailed structure with module titles, descriptions, lesson titles, and section titles.
-    Do not generate the full content for each section yet - just the titles.
-    
-    Format your response as a JSON object with the following structure:
+    Return ONLY the following JSON structure:
     {
       "title": "Course Title",
-      "description": "Course Description",
-      "difficulty": "Difficulty Level",
-      "learningStyle": "Learning Style",
+      "description": "Comprehensive course description",
+      "difficulty": "${difficultyMap[params.knowledgeLevel]}",
+      "learningStyle": "${params.learningStyle}",
       "modules": [
         {
           "title": "Module Title",
-          "description": "Module Description",
+          "description": "Module description",
           "lessons": [
             {
               "title": "Lesson Title",
@@ -85,61 +96,104 @@ export async function generateCourseSyllabus(params: CourseGenerationParams): Pr
           ]
         }
       ]
-    }
-    
-    Ensure the JSON is valid and properly formatted.
-    `
+    }`
 
-    // Generate content
+    // Generate the content
     const result = await model.generateContent(prompt)
     const response = await result.response
     const text = response.text()
 
-    // Parse the JSON response
-    // We need to extract the JSON from the text, as Gemini might include additional text
+    // Extract JSON from response
     const jsonMatch = text.match(/\{[\s\S]*\}/)
     if (!jsonMatch) {
       throw new Error("Failed to generate valid course structure")
     }
 
-    const courseStructure = JSON.parse(jsonMatch[0])
+    // Parse and validate the course structure
+    try {
+      const courseStructure = JSON.parse(jsonMatch[0])
+      
+      // Validate required fields
+      if (!courseStructure.title || !courseStructure.description || !courseStructure.modules?.length) {
+        throw new Error("Generated course structure is incomplete")
+      }
 
-    // Create the course object with the generated structure
-    const course: CourseData = {
-      id: courseId,
-      title: courseStructure.title,
-      description: courseStructure.description,
-      difficulty: courseStructure.difficulty,
-      learningStyle: courseStructure.learningStyle,
-      modules: courseStructure.modules,
+      // Create the course object
+      const course: CourseData = {
+        id: courseId,
+        title: courseStructure.title,
+        description: courseStructure.description,
+        difficulty: courseStructure.difficulty || difficultyMap[params.knowledgeLevel],
+        learningStyle: params.learningStyle,
+        modules: courseStructure.modules.map(module => ({
+          ...module,
+          lessons: module.lessons.map(lesson => ({
+            ...lesson,
+            sections: lesson.sections.map(section => ({
+              ...section,
+              content: [], // Initialize empty content array
+            }))
+          }))
+        })),
+        createdAt: new Date()
+      }
+
+      // Store in global database
+      if (!globalCourseDatabase.has(courseId)) {
+        globalCourseDatabase.set(courseId, course)
+        console.log(`Course created with ID: ${courseId}`)
+        console.log(`Total courses in database: ${globalCourseDatabase.size}`)
+        console.log(`Available course IDs: ${Array.from(globalCourseDatabase.keys()).join(", ")}`)
+      } else {
+        throw new Error("Course ID already exists")
+      }
+
+      // Verify storage
+      const storedCourse = globalCourseDatabase.get(courseId)
+      if (!storedCourse) {
+        throw new Error("Failed to store course")
+      }
+
+      return courseId
+      
+    } catch (parseError) {
+      console.error("Error parsing course structure:", parseError)
+      throw new Error("Invalid course data generated")
     }
-
-    // Store the course in our database
-    courseDatabase.set(courseId, course)
-
-    return courseId
   } catch (error) {
     console.error("Error generating course:", error)
+    if (error instanceof Error) {
+      throw error
+    }
     throw new Error("Failed to generate course. Please try again.")
   }
 }
 
 export async function getCourse(courseId: string): Promise<CourseData> {
+  if (!courseId) {
+    throw new Error("Course ID is required")
+  }
+
   try {
-    const course = courseDatabase.get(courseId)
+    console.log(`Fetching course with ID: ${courseId}`)
+    console.log(`Total courses in database: ${globalCourseDatabase.size}`)
+    console.log(`Available course IDs: ${Array.from(globalCourseDatabase.keys()).join(", ")}`)
+    
+    const course = globalCourseDatabase.get(courseId)
     if (!course) {
-      throw new Error("Course not found")
+      console.error(`Course not found. Available courses: ${Array.from(globalCourseDatabase.keys()).join(", ")}`)
+      throw new Error(`Course not found with ID: ${courseId}`)
     }
     return course
   } catch (error) {
     console.error("Error fetching course:", error)
-    throw new Error("Course not found")
+    throw error instanceof Error ? error : new Error("Failed to fetch course")
   }
 }
 
 export async function generateSectionContent(params: SectionGenerationParams): Promise<Section> {
   const { courseId, moduleIndex, lessonIndex, sectionIndex } = params
-  const course = courseDatabase.get(courseId)
+  const course = globalCourseDatabase.get(courseId)
 
   if (!course) {
     throw new Error("Course not found")
@@ -154,7 +208,7 @@ export async function generateSectionContent(params: SectionGenerationParams): P
   try {
     // Configure the model
     const model = genAI.getGenerativeModel({
-      model: "gemini-pro",
+      model: "gemini-2.0-flash", // Updated model name
       safetySettings: [
         {
           category: HarmCategory.HARM_CATEGORY_HARASSMENT,
@@ -230,7 +284,7 @@ export async function generateSectionContent(params: SectionGenerationParams): P
     // Update the course in our database
     const updatedCourse = { ...course }
     updatedCourse.modules[moduleIndex].lessons[lessonIndex].sections[sectionIndex] = updatedSection
-    courseDatabase.set(courseId, updatedCourse)
+    globalCourseDatabase.set(courseId, updatedCourse)
 
     return updatedSection
   } catch (error) {
@@ -346,7 +400,7 @@ function processSectionContent(text: string): Partial<Section> {
 
 export async function askQuestion(params: QuestionParams): Promise<string> {
   const { courseId, moduleIndex, lessonIndex, sectionIndex, question } = params
-  const course = courseDatabase.get(courseId)
+  const course = globalCourseDatabase.get(courseId)
 
   if (!course) {
     throw new Error("Course not found")
@@ -361,7 +415,7 @@ export async function askQuestion(params: QuestionParams): Promise<string> {
   try {
     // Configure the model
     const model = genAI.getGenerativeModel({
-      model: "gemini-pro",
+      model: "gemini-2.0-flash", // Updated model name
       safetySettings: [
         {
           category: HarmCategory.HARM_CATEGORY_HARASSMENT,
@@ -446,14 +500,18 @@ export async function askQuestion(params: QuestionParams): Promise<string> {
 }
 
 export async function getAllCourses(): Promise<CourseData[]> {
-  // Return all courses from our mock database
-  return Array.from(courseDatabase.values())
+  try {
+    return Array.from(globalCourseDatabase.values())
+  } catch (error) {
+    console.error("Error fetching courses:", error)
+    throw error
+  }
 }
 
 // Add some sample courses to the database for testing
 function addSampleCourses() {
   // Only add sample courses if the database is empty
-  if (courseDatabase.size === 0) {
+  if (globalCourseDatabase.size === 0) {
     const sampleCourses = [
       {
         id: uuidv4(),
@@ -564,11 +622,15 @@ function addSampleCourses() {
     ]
 
     sampleCourses.forEach((course) => {
-      courseDatabase.set(course.id, course)
+      globalCourseDatabase.set(course.id, course)
     })
+    console.log("Sample courses added to global database")
+    console.log(`Available courses: ${Array.from(globalCourseDatabase.keys()).join(", ")}`)
   }
 }
 
 // Add sample courses when the module is imported
 addSampleCourses()
+console.log("Sample courses added to database")
+console.log(`Available courses: ${Array.from(globalCourseDatabase.keys()).join(", ")}`)
 

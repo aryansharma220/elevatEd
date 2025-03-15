@@ -5,11 +5,12 @@ export interface CourseData {
   difficulty: string
   learningStyle: string
   modules: Module[]
+  createdAt?: Date
 }
 
 export interface Module {
   title: string
-  description?: string
+  description: string
   lessons: Lesson[]
 }
 
@@ -28,7 +29,7 @@ export interface Section {
 }
 
 export interface ContentItem {
-  type: "text" | "heading" | "code" | "image" | "list" | "note"
+  type: 'text' | 'heading' | 'code' | 'list' | 'note' | 'image'
   content?: string
   language?: string
   items?: string[]

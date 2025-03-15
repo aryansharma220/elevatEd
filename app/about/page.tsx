@@ -258,7 +258,7 @@ export default function AboutPage() {
 async function generatePersonalizedCourse(topic, userLevel, preferences) {
   // Initialize Gemini Pro model with advanced settings
   const model = await GeminiModel.initialize({
-    modelName: 'gemini-pro-vision',
+    modelName: 'gemini-2.0-flash',
     apiVersion: 'v1',
     temperature: 0.7,
     maxOutputTokens: 8192,

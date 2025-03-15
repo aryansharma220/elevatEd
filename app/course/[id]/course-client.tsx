@@ -33,8 +33,9 @@ interface CourseClientProps {
   courseData: CourseData
 }
 
-export default function CourseClient({ courseData }: CourseClientProps) {
+export default function CourseClient({ courseData: initialCourseData }: CourseClientProps) {
   const { toast } = useToast()
+  const [courseData, setCourseData] = useState<CourseData>(initialCourseData)
   const [activeModule, setActiveModule] = useState(0)
   const [activeLesson, setActiveLesson] = useState(0)
   const [activeSection, setActiveSection] = useState(0)
