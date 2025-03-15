@@ -1,6 +1,8 @@
 "use client"
 
 import { useState, useEffect } from "react"
+import { useToast } from "@/hooks/use-toast"
+import { useParams } from "next/navigation"
 import Link from "next/link"
 import { Button } from "@/components/ui/button"
 import { Card, CardContent, CardDescription, CardFooter, CardHeader, CardTitle } from "@/components/ui/card"
@@ -22,7 +24,6 @@ import { Input } from "@/components/ui/input"
 import { Select, SelectContent, SelectItem, SelectTrigger, SelectValue } from "@/components/ui/select"
 import { getAllCourses } from "@/lib/course-generator"
 import type { CourseData } from "@/lib/types"
-import { useToast } from "@/hooks/use-toast"
 
 export default function DashboardPage() {
   const { toast } = useToast()
@@ -31,32 +32,43 @@ export default function DashboardPage() {
   const [searchQuery, setSearchQuery] = useState("")
   const [sortBy, setSortBy] = useState("newest")
   const [filterDifficulty, setFilterDifficulty] = useState("all")
+  const [isDeleting, setIsDeleting] = useState(false)
 
   useEffect(() => {
+    let mounted = true;
+
     const fetchCourses = async () => {
-      setLoading(true)
       try {
         const data = await getAllCourses()
-        setCourses(data)
+        if (mounted) {
+          setCourses(data || [])
+        }
       } catch (error) {
         console.error("Error fetching courses:", error)
-        toast({
-          title: "Error",
-          description: "Failed to load your courses. Please try again.",
-          variant: "destructive",
-        })
+        if (mounted) {
+          toast({
+            title: "Error",
+            description: "Failed to load your courses. Please try again.",
+            variant: "destructive",
+          })
+          setCourses([])
+        }
       } finally {
-        setLoading(false)
+        if (mounted) {
+          setLoading(false)
+        }
       }
     }
 
     fetchCourses()
+
+    return () => {
+      mounted = false
+    }
   }, [toast])
 
-  // Filter and sort courses
   const filteredCourses = courses
     .filter((course) => {
-      // Apply search filter
       if (searchQuery) {
         const query = searchQuery.toLowerCase()
         return course.title.toLowerCase().includes(query) || course.description.toLowerCase().includes(query)
@@ -64,17 +76,13 @@ export default function DashboardPage() {
       return true
     })
     .filter((course) => {
-      // Apply difficulty filter
       if (filterDifficulty !== "all") {
         return course.difficulty.toLowerCase() === filterDifficulty.toLowerCase()
       }
       return true
     })
     .sort((a, b) => {
-      // Apply sorting
       if (sortBy === "newest") {
-        // In a real app, we'd use createdAt dates
-        // For this mock, we'll use the course ID as a proxy for creation time
         return b.id.localeCompare(a.id)
       } else if (sortBy === "oldest") {
         return a.id.localeCompare(b.id)
@@ -86,21 +94,43 @@ export default function DashboardPage() {
       return 0
     })
 
-  const handleDeleteCourse = (courseId: string) => {
-    // In a real implementation, this would call an API to delete the course
-    setCourses(courses.filter((course) => course.id !== courseId))
-    toast({
-      title: "Course deleted",
-      description: "The course has been successfully deleted.",
-    })
+  const handleDeleteCourse = async (courseId: string) => {
+    if (isDeleting) return;
+
+    setIsDeleting(true)
+    try {
+      await fetch(`/api/courses/${courseId}`, { 
+        method: 'DELETE',
+        headers: {
+          'Content-Type': 'application/json'
+        }
+      })
+      setCourses(prevCourses => prevCourses.filter(course => course.id !== courseId))
+      toast({
+        title: "Success",
+        description: "Course deleted successfully.",
+      })
+    } catch (error) {
+      console.error("Error deleting course:", error)
+      toast({
+        title: "Error",
+        description: "Failed to delete the course. Please try again.",
+        variant: "destructive",
+      })
+    } finally {
+      setIsDeleting(false)
+    }
   }
 
   if (loading) {
     return (
       <div className="min-h-screen flex items-center justify-center bg-slate-50 dark:bg-slate-900">
-        <div className="text-center">
+        <div className="text-center space-y-4">
           <Loader2 className="h-12 w-12 animate-spin mx-auto text-purple-600 dark:text-purple-400" />
-          <p className="mt-4 text-lg text-slate-600 dark:text-slate-300">Loading your courses...</p>
+          <div>
+            <p className="text-lg font-medium text-slate-900 dark:text-white">Loading your courses...</p>
+            <p className="text-sm text-slate-600 dark:text-slate-400">Please wait while we fetch your content</p>
+          </div>
         </div>
       </div>
     )
@@ -203,8 +233,13 @@ export default function DashboardPage() {
                           size="icon"
                           className="h-8 w-8"
                           onClick={() => handleDeleteCourse(course.id)}
+                          disabled={isDeleting}
                         >
-                          <Trash2 className="h-4 w-4 text-muted-foreground" />
+                          {isDeleting ? (
+                            <Loader2 className="h-4 w-4 animate-spin" />
+                          ) : (
+                            <Trash2 className="h-4 w-4 text-muted-foreground" />
+                          )}
                         </Button>
                       </div>
                     </div>

@@ -125,13 +125,16 @@ export async function generateCourseSyllabus(params: CourseGenerationParams): Pr
 }
 
 export async function getCourse(courseId: string): Promise<CourseData> {
-  const course = courseDatabase.get(courseId)
-
-  if (!course) {
+  try {
+    const course = courseDatabase.get(courseId)
+    if (!course) {
+      throw new Error("Course not found")
+    }
+    return course
+  } catch (error) {
+    console.error("Error fetching course:", error)
     throw new Error("Course not found")
   }
-
-  return course
 }
 
 export async function generateSectionContent(params: SectionGenerationParams): Promise<Section> {
