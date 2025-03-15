@@ -9,10 +9,11 @@ import { Label } from "@/components/ui/label"
 import { Slider } from "@/components/ui/slider"
 import { Switch } from "@/components/ui/switch"
 import { RadioGroup, RadioGroupItem } from "@/components/ui/radio-group"
-import { Loader2, ArrowRight, Sparkles } from "lucide-react"
+import { Loader2, ArrowRight, Sparkles, CheckCircle } from "lucide-react"
 import { useRouter } from "next/navigation"
 import { generateCourseSyllabus } from "@/lib/course-generator"
 import { NavHeader } from "@/components/nav-header"
+import { sleep } from "@/lib/utils"
 
 export default function CreateCoursePage() {
   const router = useRouter()
@@ -25,6 +26,8 @@ export default function CreateCoursePage() {
   const [includeExercises, setIncludeExercises] = useState(true)
   const [loading, setLoading] = useState(false)
   const [error, setError] = useState("")
+  const [generationStep, setGenerationStep] = useState<'idle' | 'outline' | 'content' | 'done'>('idle')
+  const [progressPercentage, setProgressPercentage] = useState(0)
 
   const handleSubmit = async (e: React.FormEvent) => {
     e.preventDefault()
@@ -38,8 +41,26 @@ export default function CreateCoursePage() {
 
     setLoading(true)
     setError("")
+    setGenerationStep('outline')
+    setProgressPercentage(10)
+
+    // Simulate progress updates for better UX
+    const progressInterval = setInterval(() => {
+      setProgressPercentage(prev => {
+        const newValue = prev + Math.floor(Math.random() * 5) + 1
+        return newValue > 90 ? 90 : newValue
+      })
+    }, 1000)
 
     try {
+      setGenerationStep('outline')
+      
+      // Wait a bit to simulate AI thinking
+      await sleep(1500)
+      setProgressPercentage(30)
+      setGenerationStep('content')
+      
+      // Actually generate the course
       const courseId = await generateCourseSyllabus({
         topic: trimmedTopic,
         description: description.trim(),
@@ -55,6 +76,13 @@ export default function CreateCoursePage() {
         throw new Error("No course ID returned")
       }
 
+      // Complete the progress
+      setProgressPercentage(100)
+      setGenerationStep('done')
+      
+      // Wait a moment before redirecting
+      await new Promise(r => setTimeout(r, 800))
+      
       // Redirect to the course page
       router.push(`/course/${courseId}`)
     } catch (err) {
@@ -65,6 +93,7 @@ export default function CreateCoursePage() {
           : "Failed to generate course. Please try again."
       )
     } finally {
+      clearInterval(progressInterval)
       setLoading(false)
     }
   }
@@ -228,10 +257,25 @@ export default function CreateCoursePage() {
                 disabled={loading}
               >
                 {loading ? (
-                  <>
-                    <Loader2 className="mr-2 h-4 w-4 animate-spin" />
-                    Generating Your Course...
-                  </>
+                  <div className="flex flex-col items-center w-full">
+                    <div className="flex items-center justify-center mb-2">
+                      <Loader2 className="mr-2 h-4 w-4 animate-spin" />
+                      {generationStep === 'outline' && "Crafting course structure..."}
+                      {generationStep === 'content' && "Generating detailed content..."}
+                      {generationStep === 'done' && (
+                        <span className="flex items-center">
+                          <CheckCircle className="mr-2 h-4 w-4 text-green-500" />
+                          Course ready!
+                        </span>
+                      )}
+                    </div>
+                    <div className="w-full bg-slate-200 dark:bg-slate-700 h-1.5 rounded-full overflow-hidden">
+                      <div 
+                        className="bg-gradient-to-r from-purple-500 to-blue-500 h-full transition-all duration-300 ease-out"
+                        style={{ width: `${progressPercentage}%` }}
+                      />
+                    </div>
+                  </div>
                 ) : (
                   <>
                     Generate Course

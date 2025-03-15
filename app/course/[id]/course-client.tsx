@@ -28,6 +28,7 @@ import {
 } from "lucide-react"
 import { generateSectionContent, askQuestion } from "@/lib/course-generator"
 import { NavHeader } from "@/components/nav-header"
+import { useSearchParams, useRouter } from "next/navigation"
 
 interface CourseClientProps {
   courseData: CourseData
@@ -35,11 +36,15 @@ interface CourseClientProps {
 
 export default function CourseClient({ courseData: initialCourseData }: CourseClientProps) {
   const { toast } = useToast()
+  const searchParams = useSearchParams()
+  const router = useRouter()
+  const viewMode = searchParams.get('view')
+  
   const [courseData, setCourseData] = useState<CourseData>(initialCourseData)
   const [activeModule, setActiveModule] = useState(0)
   const [activeLesson, setActiveLesson] = useState(0)
   const [activeSection, setActiveSection] = useState(0)
-  const [teachingMode, setTeachingMode] = useState(false)
+  const [teachingMode, setTeachingMode] = useState(!viewMode || viewMode !== 'outline')
   const [quizAnswers, setQuizAnswers] = useState<Record<string, number>>({})
   const [showQuizResults, setShowQuizResults] = useState<Record<string, boolean>>({})
   const [question, setQuestion] = useState("")
@@ -153,6 +158,10 @@ export default function CourseClient({ courseData: initialCourseData }: CourseCl
     // Implementation for PDF export would go here
   }
 
+  const handleReturnToDashboard = () => {
+    router.push('/dashboard')
+  }
+
   const currentModule = courseData.modules[activeModule]
   const currentLesson = currentModule?.lessons[activeLesson]
   const currentSection = currentLesson?.sections[activeSection]
@@ -183,6 +192,13 @@ export default function CourseClient({ courseData: initialCourseData }: CourseCl
                     Export PDF
                   </Button>
                 </div>
+              </div>
+
+              <div className="flex justify-between items-center mb-4">
+                <Button variant="outline" onClick={handleReturnToDashboard}>
+                  <ArrowLeft className="mr-2 h-4 w-4" />
+                  Back to Dashboard
+                </Button>
               </div>
 
               <div className="flex flex-wrap items-center gap-4 text-sm text-slate-500 dark:text-slate-400">

@@ -9,6 +9,7 @@ import { getAllCourses } from "@/lib/course-generator"
 import type { CourseData } from "@/lib/types"
 import { Badge } from "@/components/ui/badge"
 import { cn } from "@/lib/utils"
+import { useRouter } from "next/navigation"
 
 const formatLastAccessed = (date: string) => {
   if (!date) return "Never accessed";
@@ -25,6 +26,7 @@ interface CourseListProps {
 }
 
 export function CourseList({ view }: CourseListProps) {
+  const router = useRouter()
   const [courses, setCourses] = useState<CourseData[]>([])
   const [loading, setLoading] = useState(true)
   const [error, setError] = useState<string | null>(null)
@@ -43,6 +45,14 @@ export function CourseList({ view }: CourseListProps) {
     }
     loadCourses()
   }, [])
+
+  const handleContinueLearning = (courseId: string) => {
+    router.push(`/course/${courseId}`)
+  }
+
+  const handleViewDetails = (courseId: string) => {
+    router.push(`/course/${courseId}?view=outline`)
+  }
 
   if (loading) {
     return (
@@ -158,12 +168,14 @@ export function CourseList({ view }: CourseListProps) {
                 <Button 
                   className="w-full bg-gradient-to-r from-purple-600 to-blue-600 hover:from-purple-700 hover:to-blue-700 text-white shadow-lg" 
                   variant="default"
+                  onClick={() => handleContinueLearning(course.id)}
                 >
                   Continue Learning
                 </Button>
                 <Button 
                   className="w-full hover:bg-slate-100 dark:hover:bg-slate-800" 
                   variant="outline"
+                  onClick={() => handleViewDetails(course.id)}
                 >
                   View Details
                 </Button>

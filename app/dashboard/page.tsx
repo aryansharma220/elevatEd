@@ -54,10 +54,12 @@ export default function DashboardPage() {
             </p>
           </div>
           <div className="flex gap-4">
-            <Button className="bg-purple-600 hover:bg-purple-700">
-              <Plus className="mr-2 h-4 w-4" />
-              New Course
-            </Button>
+            <Link href="/create">
+              <Button className="bg-purple-600 hover:bg-purple-700">
+                <Plus className="mr-2 h-4 w-4" />
+                New Course
+              </Button>
+            </Link>
             <Button variant="outline">
               <Search className="mr-2 h-4 w-4" />
               Browse Courses
