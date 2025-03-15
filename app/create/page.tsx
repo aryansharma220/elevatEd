@@ -184,12 +184,12 @@ export default function CreateCoursePage() {
                       onValueChange={setLearningStyle}
                       className="flex flex-col space-y-2"
                     >
-                      <div className="flex items-center space-x-2">
+                      {/* <div className="flex items-center space-x-2">
                         <RadioGroupItem value="visual" id="visual" />
                         <Label htmlFor="visual" className="cursor-pointer">
                           Visual (diagrams, images)
                         </Label>
-                      </div>
+                      </div> */}
                       <div className="flex items-center space-x-2">
                         <RadioGroupItem value="textual" id="textual" />
                         <Label htmlFor="textual" className="cursor-pointer">
