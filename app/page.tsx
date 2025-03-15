@@ -33,8 +33,8 @@ export default function LandingPage() {
                 <Link href="/about" className="text-slate-600 dark:text-slate-300 hover:text-purple-600 dark:hover:text-purple-400 transition-colors">
                   About
                 </Link>
-                <Link href="/blog" className="text-slate-600 dark:text-slate-300 hover:text-purple-600 dark:hover:text-purple-400 transition-colors">
-                  Blog
+                <Link href="/community" className="text-slate-600 dark:text-slate-300 hover:text-purple-600 dark:hover:text-purple-400 transition-colors">
+                  Community
                 </Link>
               </div>
             </div>
@@ -69,8 +69,8 @@ export default function LandingPage() {
             <Link href="/about" className="block text-slate-600 dark:text-slate-300 hover:text-purple-600 dark:hover:text-purple-400 transition-colors">
               About
             </Link>
-            <Link href="/blog" className="block text-slate-600 dark:text-slate-300 hover:text-purple-600 dark:hover:text-purple-400 transition-colors">
-              Blog
+            <Link href="/forum" className="block text-slate-600 dark:text-slate-300 hover:text-purple-600 dark:hover:text-purple-400 transition-colors">
+              Forum
             </Link>
             <div className="pt-4 border-t border-slate-200 dark:border-slate-700 flex flex-col space-y-2">
               <Link href="/login">
@@ -421,7 +421,7 @@ export default function LandingPage() {
               <ul className="space-y-3">
                 <li><Link href="/docs" className="text-slate-400 hover:text-white transition-colors">Documentation</Link></li>
                 <li><Link href="/guides" className="text-slate-400 hover:text-white transition-colors">Guides</Link></li>
-                <li><Link href="/blog" className="text-slate-400 hover:text-white transition-colors">Blog</Link></li>
+                <li><Link href="/community" className="text-slate-400 hover:text-white transition-colors">Community</Link></li>
                 <li><Link href="/support" className="text-slate-400 hover:text-white transition-colors">Support</Link></li>
               </ul>
             </div>
@@ -433,6 +433,7 @@ export default function LandingPage() {
                 <li><Link href="/careers" className="text-slate-400 hover:text-white transition-colors">Careers</Link></li>
                 <li><Link href="/privacy" className="text-slate-400 hover:text-white transition-colors">Privacy</Link></li>
                 <li><Link href="/terms" className="text-slate-400 hover:text-white transition-colors">Terms</Link></li>
+                <li><Link href="/forum" className="text-slate-400 hover:text-white transition-colors">Forum</Link></li>
               </ul>
             </div>
           </div>
