@@ -5,7 +5,7 @@ import { Button } from "@/components/ui/button"
 import { 
   ArrowRight, BookOpen, Brain, Layers, Lightbulb, Sparkles, 
   UserCheck, ChevronRight, Star, Menu, X, Github, Twitter, 
-  Linkedin, Check 
+  Linkedin, Check, MessageSquare 
 } from "lucide-react"
 import { useState } from "react"
 
@@ -30,11 +30,11 @@ export default function LandingPage() {
                 <Link href="/pricing" className="text-slate-600 dark:text-slate-300 hover:text-purple-600 dark:hover:text-purple-400 transition-colors">
                   Pricing
                 </Link>
-                <Link href="/about" className="text-slate-600 dark:text-slate-300 hover:text-purple-600 dark:hover:text-purple-400 transition-colors">
-                  About
-                </Link>
                 <Link href="/community" className="text-slate-600 dark:text-slate-300 hover:text-purple-600 dark:hover:text-purple-400 transition-colors">
                   Community
+                </Link>
+                <Link href="/about" className="text-slate-600 dark:text-slate-300 hover:text-purple-600 dark:hover:text-purple-400 transition-colors">
+                  About
                 </Link>
               </div>
             </div>
@@ -60,19 +60,41 @@ export default function LandingPage() {
         {/* Mobile menu */}
         {mobileMenuOpen && (
           <div className="md:hidden p-4 space-y-4 bg-white dark:bg-slate-900 border-b border-slate-200 dark:border-slate-800">
-            <Link href="/features" className="block text-slate-600 dark:text-slate-300 hover:text-purple-600 dark:hover:text-purple-400 transition-colors">
+            <Link href="/features" className="block text-slate-600 dark:text-slate-300 hover:text-purple-600 dark:hover:text-purple-400 transition-colors 
+              py-2 px-3 rounded-lg flex items-center hover:bg-purple-50 dark:hover:bg-purple-900/10">
+              <Layers className="h-5 w-5 mr-3 opacity-70" />
               Features
             </Link>
-            <Link href="/pricing" className="block text-slate-600 dark:text-slate-300 hover:text-purple-600 dark:hover:text-purple-400 transition-colors">
+            <Link href="/pricing" className="block text-slate-600 dark:text-slate-300 hover:text-purple-600 dark:hover:text-purple-400 transition-colors
+              py-2 px-3 rounded-lg flex items-center hover:bg-purple-50 dark:hover:bg-purple-900/10">
+              <Star className="h-5 w-5 mr-3 opacity-70" />
               Pricing
             </Link>
-            <Link href="/about" className="block text-slate-600 dark:text-slate-300 hover:text-purple-600 dark:hover:text-purple-400 transition-colors">
+            <Link href="/community" className="block text-slate-600 dark:text-slate-300 hover:text-purple-600 dark:hover:text-purple-400 transition-colors
+              py-2 px-3 rounded-lg flex items-center hover:bg-purple-50 dark:hover:bg-purple-900/10">
+              <MessageSquare className="h-5 w-5 mr-3 opacity-70" />
+              Community
+            </Link>
+            <Link href="/about" className="block text-slate-600 dark:text-slate-300 hover:text-purple-600 dark:hover:text-purple-400 transition-colors
+              py-2 px-3 rounded-lg flex items-center hover:bg-purple-50 dark:hover:bg-purple-900/10">
+              <UserCheck className="h-5 w-5 mr-3 opacity-70" />
               About
             </Link>
-            <Link href="/forum" className="block text-slate-600 dark:text-slate-300 hover:text-purple-600 dark:hover:text-purple-400 transition-colors">
-              Forum
+            <Link href="/community" className="block text-slate-600 dark:text-slate-300 hover:text-purple-600 dark:hover:text-purple-400 transition-colors
+              py-2 px-3 rounded-lg flex items-center hover:bg-purple-50 dark:hover:bg-purple-900/10">
+              <Sparkles className="h-5 w-5 mr-3 opacity-70" />
+              Community
             </Link>
-            <div className="pt-4 border-t border-slate-200 dark:border-slate-700 flex flex-col space-y-2">
+            <div className="pt-6 mt-6 border-t border-slate-200 dark:border-slate-700 flex flex-col space-y-3">
+              <div className="bg-gradient-to-r from-purple-100 to-blue-100 dark:from-purple-900/20 dark:to-blue-900/20 p-4 rounded-lg mb-2">
+                <h4 className="font-medium text-purple-700 dark:text-purple-300 mb-1 flex items-center">
+                  <Lightbulb className="h-4 w-4 mr-2" />
+                  Pro Tip
+                </h4>
+                <p className="text-sm text-slate-700 dark:text-slate-300">
+                  Sign up today and get access to 5 free AI-generated courses!
+                </p>
+              </div>
               <Link href="/login">
                 <Button variant="outline" className="w-full">Log in</Button>
               </Link>
@@ -491,6 +513,12 @@ const features = [
     description:
       "Download your courses as PDFs, interactive HTML pages, or SCORM modules for integration with learning management systems.",
     icon: <BookOpen className="h-6 w-6 text-purple-600 dark:text-purple-400" />,
+  },
+  {
+    title: "Community Discussions",
+    description:
+      "Connect with fellow learners in our community hub with topic-specific discussion threads and AI-powered assistance.",
+    icon: <MessageSquare className="h-6 w-6 text-purple-600 dark:text-purple-400" />,
   },
 ]
 

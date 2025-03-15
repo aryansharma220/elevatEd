@@ -70,8 +70,8 @@ export default function PricesPage() {
                 <Link href="/about" className="text-slate-600 dark:text-slate-300 hover:text-purple-600 dark:hover:text-purple-400 transition-colors">
                   About
                 </Link>
-                <Link href="/blog" className="text-slate-600 dark:text-slate-300 hover:text-purple-600 dark:hover:text-purple-400 transition-colors">
-                  Blog
+                <Link href="/community" className="text-slate-600 dark:text-slate-300 hover:text-purple-600 dark:hover:text-purple-400 transition-colors">
+                  Community
                 </Link>
               </div>
             </div>
@@ -106,8 +106,8 @@ export default function PricesPage() {
             <Link href="/about" className="block text-slate-600 dark:text-slate-300 hover:text-purple-600 dark:hover:text-purple-400 transition-colors">
               About
             </Link>
-            <Link href="/blog" className="block text-slate-600 dark:text-slate-300 hover:text-purple-600 dark:hover:text-purple-400 transition-colors">
-              Blog
+            <Link href="/community" className="block text-slate-600 dark:text-slate-300 hover:text-purple-600 dark:hover:text-purple-400 transition-colors">
+              Community
             </Link>
             <div className="pt-4 border-t border-slate-200 dark:border-slate-700 flex flex-col space-y-2">
               <Link href="/login">
