@@ -103,7 +103,7 @@ export default function AboutPage() {
             </div>
 
             <h1 className="text-4xl md:text-5xl font-bold tracking-tight text-slate-900 dark:text-white mb-6">
-              Transforming Education with <span className="text-transparent bg-clip-text bg-gradient-to-r from-purple-600 to-blue-500 dark:from-purple-400 dark:to-blue-400">AI</span>
+              Transform Education with <span className="text-transparent bg-clip-text bg-gradient-to-r from-purple-600 to-blue-500 dark:from-purple-400 dark:to-blue-400">AI</span>
             </h1>
 
             <p className="text-lg md:text-xl text-slate-600 dark:text-slate-300 mb-8">
