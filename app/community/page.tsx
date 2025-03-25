@@ -12,6 +12,7 @@ import { Button } from "@/components/ui/button"
 import { Avatar, AvatarFallback, AvatarImage } from "@/components/ui/avatar"
 import { Badge } from "@/components/ui/badge"
 import { useState } from "react"
+import { usePathname } from "next/navigation"
 
 export default function CommunityPage() {
   const [activeTab, setActiveTab] = useState<string>("discussions");
