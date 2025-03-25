@@ -138,15 +138,15 @@ export default function CommunityPage() {
             </p>
             
             <div className="flex flex-wrap justify-center gap-3 mb-8">
-              <Badge className="px-3 py-1 text-sm bg-purple-100 dark:bg-purple-900/30 text-purple-800 dark:text-purple-300 border-none">
+              <Badge className="px-3 py-1 text-sm bg-purple-100 dark:bg-purple-900/30 text-purple-800 dark:text-purple-300 border-none  cursor-default">
                 <Globe className="h-3.5 w-3.5 mr-1" />
                 <span>7,500+ Members</span>
               </Badge>
-              <Badge className="px-3 py-1 text-sm bg-blue-100 dark:bg-blue-900/30 text-blue-800 dark:text-blue-300 border-none">
+              <Badge className="px-3 py-1 text-sm bg-blue-100 dark:bg-blue-900/30 text-blue-800 dark:text-blue-300 border-none  cursor-default">
                 <MessageSquare className="h-3.5 w-3.5 mr-1" />
                 <span>3,200+ Discussions</span>
               </Badge>
-              <Badge className="px-3 py-1 text-sm bg-green-100 dark:bg-green-900/30 text-green-800 dark:text-green-300 border-none">
+              <Badge className="px-3 py-1 text-sm bg-green-100 dark:bg-green-900/30 text-green-800 dark:text-green-300 border-none  cursor-default">
                 <Award className="h-3.5 w-3.5 mr-1" />
                 <span>120+ Countries</span>
               </Badge>
