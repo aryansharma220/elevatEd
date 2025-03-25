@@ -4,6 +4,7 @@ import Link from "next/link"
 import { useState, useEffect } from "react"
 import { useTheme } from "next-themes"
 import { Button } from "@/components/ui/button"
+import { usePathname } from "next/navigation"  
 import {
   BookOpen,
   Layers,
@@ -28,14 +29,12 @@ export function Navbar() {
   }, [])
   const pathname = usePathname();
 
-  // Fixed order of navigation links that won't change
-  const navLinks = [
-    { href: "/features", label: "Features" },
-    { href: "/pricing", label: "Pricing" },
-    { href: "/about", label: "About" },
-    { href: "/community", label: "Community" },
-  ];
-
+ const navLinks = [
+  { href: "/features", label: "Features", icon: <Layers className="h-5 w-5" /> },
+  { href: "/pricing", label: "Pricing", icon: <Star className="h-5 w-5" /> },
+  { href: "/about", label: "About", icon: <UserCheck className="h-5 w-5" /> },
+  { href: "/community", label: "Community", icon: <MessageSquare className="h-5 w-5" /> },
+]  
   return (
     <nav className="bg-white/80 dark:bg-slate-900/80 backdrop-blur-sm fixed top-0 left-0 right-0 z-50 border-b border-slate-200 dark:border-slate-800">
       <div className="container mx-auto px-4">
