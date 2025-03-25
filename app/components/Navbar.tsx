@@ -26,6 +26,15 @@ export function Navbar() {
   useEffect(() => {
     setMounted(true)
   }, [])
+  const pathname = usePathname();
+
+  // Fixed order of navigation links that won't change
+  const navLinks = [
+    { href: "/features", label: "Features" },
+    { href: "/pricing", label: "Pricing" },
+    { href: "/about", label: "About" },
+    { href: "/community", label: "Community" },
+  ];
 
   return (
     <nav className="bg-white/80 dark:bg-slate-900/80 backdrop-blur-sm fixed top-0 left-0 right-0 z-50 border-b border-slate-200 dark:border-slate-800">
