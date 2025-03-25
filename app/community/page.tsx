@@ -16,6 +16,16 @@ import { useState } from "react"
 export default function CommunityPage() {
   const [activeTab, setActiveTab] = useState<string>("discussions");
   const [mobileMenuOpen, setMobileMenuOpen] = useState(false);
+  const pathname = usePathname();
+
+  // Fixed order of navigation links that won't change
+  const navLinks = [
+    { href: "/features", label: "Features" },
+    { href: "/pricing", label: "Pricing" },
+    { href: "/about", label: "About" },
+    { href: "/community", label: "Community" },
+  ];
+
 
   return (
     <div className="flex flex-col min-h-screen">
