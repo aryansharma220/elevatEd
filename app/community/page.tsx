@@ -39,12 +39,13 @@ export default function CommunityPage() {
                 <Link href="/pricing" className="text-slate-600 dark:text-slate-300 hover:text-purple-600 dark:hover:text-purple-400 transition-colors">
                   Pricing
                 </Link>
-                <Link href="/community" className="text-purple-600 dark:text-purple-400 transition-colors">
-                  Community
-                </Link>
                 <Link href="/about" className="text-slate-600 dark:text-slate-300 hover:text-purple-600 dark:hover:text-purple-400 transition-colors">
                   About
                 </Link>
+                <Link href="/community" className="text-purple-600 dark:text-purple-400 transition-colors">
+                  Community
+                </Link>
+                
               </div>
             </div>
             <div className="hidden md:flex items-center space-x-4">
