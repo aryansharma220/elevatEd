@@ -80,16 +80,17 @@ export default function CommunityPage() {
               <Star className="h-5 w-5 mr-3 opacity-70" />
               Pricing
             </Link>
+              <Link href="/about" className="block text-slate-600 dark:text-slate-300 hover:text-purple-600 dark:hover:text-purple-400 transition-colors
+              py-2 px-3 rounded-lg flex items-center hover:bg-purple-50 dark:hover:bg-purple-900/10">
+              <UserCheck className="h-5 w-5 mr-3 opacity-70" />
+              About
+            </Link>
             <Link href="/community" className="block text-purple-600 dark:text-purple-400 transition-colors
               py-2 px-3 rounded-lg flex items-center bg-purple-50 dark:bg-purple-900/10">
               <Users className="h-5 w-5 mr-3 opacity-70" />
               Community
             </Link>
-            <Link href="/about" className="block text-slate-600 dark:text-slate-300 hover:text-purple-600 dark:hover:text-purple-400 transition-colors
-              py-2 px-3 rounded-lg flex items-center hover:bg-purple-50 dark:hover:bg-purple-900/10">
-              <UserCheck className="h-5 w-5 mr-3 opacity-70" />
-              About
-            </Link>
+          
             <div className="pt-6 mt-6 border-t border-slate-200 dark:border-slate-700 flex flex-col space-y-3">
               <div className="bg-gradient-to-r from-purple-100 to-blue-100 dark:from-purple-900/20 dark:to-blue-900/20 p-4 rounded-lg mb-2">
                 <h4 className="font-medium text-purple-700 dark:text-purple-300 mb-1 flex items-center">
