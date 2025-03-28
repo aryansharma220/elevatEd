@@ -42,7 +42,7 @@ export function Navbar() {
           <div className="flex items-center">
             <Link href="/" className="flex items-center">
               <BookOpen className="h-6 w-6 text-purple-600 dark:text-purple-400 mr-2" />
-              <span className="text-xl font-bold text-slate-900 dark:text-white">CourseGemini</span>
+              <span className="text-xl font-bold text-slate-900 dark:text-white">elevatEd</span>
             </Link>
             <div className="hidden md:flex ml-10 space-x-8">
               <Link href="/features" className="text-slate-600 dark:text-slate-300 hover:text-purple-600 dark:hover:text-purple-400 transition-colors">Features</Link>

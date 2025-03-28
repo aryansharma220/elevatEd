@@ -359,7 +359,7 @@ export default function LandingPage() {
               What Our Users Say
             </h2>
             <p className="text-lg text-slate-600 dark:text-slate-300 max-w-2xl mx-auto">
-              Join thousands of satisfied learners who have transformed their knowledge with CourseGemini
+              Join thousands of satisfied learners who have transformed their knowledge with elevatEd
             </p>
           </div>
           
@@ -562,7 +562,7 @@ const testimonials = [
   {
     name: "Sarah Johnson",
     role: "Data Science Student",
-    quote: "CourseGemini generated a perfect Python course that filled exactly the gaps in my knowledge. It's like having a personal tutor that knows exactly what I need to learn."
+    quote: "elevatEd generated a perfect Python course that filled exactly the gaps in my knowledge. It's like having a personal tutor that knows exactly what I need to learn."
   },
   {
     name: "Michael Chen",

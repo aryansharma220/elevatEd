@@ -19,7 +19,7 @@ export default function SignUpPage() {
             </Link>
             <div className="flex items-center">
               <BookOpen className="h-6 w-6 text-purple-600 dark:text-purple-400 mr-2" />
-              <span className="text-xl font-bold text-slate-900 dark:text-white">CourseGemini</span>
+              <span className="text-xl font-bold text-slate-900 dark:text-white">elevatEd</span>
             </div>
             <div className="w-5" />
           </div>

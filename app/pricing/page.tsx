@@ -58,7 +58,7 @@ export default function PricesPage() {
             <div className="flex items-center">
               <Link href="/" className="flex items-center">
                 <BookOpen className="h-6 w-6 text-purple-600 dark:text-purple-400 mr-2" />
-                <span className="text-xl font-bold text-slate-900 dark:text-white">CourseGemini</span>
+                <span className="text-xl font-bold text-slate-900 dark:text-white">elevatEd</span>
               </Link>
               <div className="hidden md:flex ml-10 space-x-8">
                 <Link href="/features" className="text-slate-600 dark:text-slate-300 hover:text-purple-600 dark:hover:text-purple-400 transition-colors">
@@ -192,7 +192,7 @@ export default function PricesPage() {
             <div>
               <div className="flex items-center mb-4">
                 <BookOpen className="h-6 w-6 text-purple-400 mr-2" />
-                <span className="text-xl font-bold text-white">CourseGemini</span>
+                <span className="text-xl font-bold text-white">elevatEd</span>
               </div>
               <p className="mb-4 text-slate-400">AI-powered learning platform that adapts to your unique needs and learning style.</p>
               <div className="flex space-x-4">

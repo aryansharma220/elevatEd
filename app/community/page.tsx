@@ -39,7 +39,7 @@ export default function CommunityPage() {
                 <Link href="/">
                   <div className="flex items-center">
                     <BookOpen className="h-6 w-6 text-purple-600 dark:text-purple-400 mr-2" />
-                    <span className="text-xl font-bold text-slate-900 dark:text-white">CourseGemini</span>
+                    <span className="text-xl font-bold text-slate-900 dark:text-white">elevatEd</span>
                   </div>
                 </Link>
               </div>
@@ -238,7 +238,7 @@ export default function CommunityPage() {
             <div>
               <div className="flex items-center mb-4">
                 <BookOpen className="h-6 w-6 text-purple-400 mr-2" />
-                <span className="text-xl font-bold text-white">CourseGemini</span>
+                <span className="text-xl font-bold text-white">elevatEd</span>
               </div>
               <p className="mb-4 text-slate-400">AI-powered learning platform that adapts to your unique needs and learning style.</p>
               <div className="flex space-x-4">
