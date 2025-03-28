@@ -20,7 +20,7 @@ export default function FeaturesPage() {
             <div className="flex items-center">
               <Link href="/" className="flex items-center">
                 <BookOpen className="h-6 w-6 text-purple-600 dark:text-purple-400 mr-2" />
-                <span className="text-xl font-bold text-slate-900 dark:text-white">elevatEd</span>
+                <span className="text-xl font-bold text-slate-900 dark:text-white">ElevatEd</span>
               </Link>
               <div className="hidden md:flex ml-10 space-x-8">
                 <Link href="/features" className="text-purple-600 dark:text-purple-400 font-medium transition-colors">
@@ -109,7 +109,7 @@ export default function FeaturesPage() {
               </span>
             </h1>
             <p className="text-xl text-slate-600 dark:text-slate-300 leading-relaxed max-w-2xl mx-auto">
-              Explore how elevatEd transforms education with cutting-edge AI technology, delivering personalized learning experiences for everyone.
+              Explore how ElevatEd transforms education with cutting-edge AI technology, delivering personalized learning experiences for everyone.
             </p>
           </div>
           
@@ -199,7 +199,7 @@ export default function FeaturesPage() {
                       </div>
                       <div className="flex items-center mx-auto px-4 py-1 rounded-full bg-white/80 dark:bg-slate-900/50 text-xs text-slate-500 dark:text-slate-400 shadow-sm">
                         <Sparkles className="h-3 w-3 mr-2 text-purple-500" />
-                        elevatEd.ai/learn/machine-learning
+                        ElevatEd.ai/learn/machine-learning
                       </div>
                     </div>
                     
@@ -419,7 +419,7 @@ export default function FeaturesPage() {
               Everything You Need for <span className="text-transparent bg-clip-text bg-gradient-to-r from-purple-600 to-blue-500 dark:from-purple-400 dark:to-blue-400">Effective Learning</span>
             </h2>
             <p className="text-xl text-slate-600 dark:text-slate-300 leading-relaxed max-w-2xl mx-auto">
-              elevatEd provides a comprehensive set of tools powered by Google Gemini's advanced AI capabilities.
+              ElevatEd provides a comprehensive set of tools powered by Google Gemini's advanced AI capabilities.
             </p>
           </div>
           
@@ -478,7 +478,7 @@ export default function FeaturesPage() {
                   <path d="M4.583 17.321C3.553 16.227 3 15 3 13.011c0-3.5 2.457-6.637 6.03-8.188l.893 1.378c-3.335 1.804-3.987 4.145-4.247 5.621.537-.278 1.24-.375 1.929-.311 1.804.167 3.226 1.648 3.226 3.489a3.5 3.5 0 01-3.5 3.5c-1.073 0-2.099-.49-2.748-1.179zm10 0C13.553 16.227 13 15 13 13.011c0-3.5 2.457-6.637 6.03-8.188l.893 1.378c-3.335 1.804-3.987 4.145-4.247 5.621.537-.278 1.24-.375 1.929-.311 1.804.167 3.226 1.648 3.226 3.489a3.5 3.5 0 01-3.5 3.5c-1.073 0-2.099-.49-2.748-1.179z" />
                 </svg>
                 <p className="text-lg text-slate-700 dark:text-slate-200 italic">
-                  As an instructor, elevatEd has completely transformed how I create learning materials. The AI-generated content is not only accurate but deeply adaptive to individual student needs. It's saved me countless hours while improving learning outcomes for my students.
+                  As an instructor, ElevatEd has completely transformed how I create learning materials. The AI-generated content is not only accurate but deeply adaptive to individual student needs. It's saved me countless hours while improving learning outcomes for my students.
                 </p>
               </div>
             </div>
@@ -519,7 +519,7 @@ export default function FeaturesPage() {
         <div className="container mx-auto px-4">         
           <div className="border-t border-slate-800 mt-8 pt-8 flex flex-col md:flex-row justify-between items-center">
             <p className="text-sm text-slate-500">
-              © {new Date().getFullYear()} elevatEd. All rights reserved.
+              © {new Date().getFullYear()} ElevatEd. All rights reserved.
             </p>
             <div className="mt-4 md:mt-0">
               <div className="flex items-center space-x-2 text-sm text-slate-500">

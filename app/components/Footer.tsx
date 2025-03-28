@@ -10,7 +10,7 @@ export function Footer() {
           <div>
             <div className="flex items-center mb-4">
               <BookOpen className="h-6 w-6 text-purple-400 mr-2" />
-              <span className="text-xl font-bold text-white">elevatEd</span>
+              <span className="text-xl font-bold text-white">ElevatEd</span>
             </div>
             <p className="mb-4 text-slate-400">AI-powered learning platform that adapts to your unique needs and learning style.</p>
             <div className="flex space-x-4">
@@ -31,7 +31,7 @@ export function Footer() {
         
         <div className="border-t border-slate-800 mt-8 pt-8 flex flex-col md:flex-row justify-between items-center">
           <p className="text-sm text-slate-500">
-            © {new Date().getFullYear()} elevatEd. All rights reserved.
+            © {new Date().getFullYear()} ElevatEd. All rights reserved.
           </p>
           <div className="mt-4 md:mt-0">
             <div className="flex items-center space-x-2 text-sm text-slate-500">

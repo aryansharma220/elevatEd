@@ -1,8 +1,8 @@
-# elevatEd - AI-Powered Learning Platform
+# ElevatEd - AI-Powered Learning Platform
 
-elevatEd is an advanced learning platform that leverages Google Gemini's AI capabilities to create personalized, interactive learning experiences. The platform adapts to each user's unique learning style, pace, and knowledge level to deliver optimized educational content.
+ElevatEd is an advanced learning platform that leverages Google Gemini's AI capabilities to create personalized, interactive learning experiences. The platform adapts to each user's unique learning style, pace, and knowledge level to deliver optimized educational content.
 
-![elevatEd Logo](public/elevated-logo.png)
+![ElevatEd Logo](public/ElevatEd-logo.png)
 
 ## Table of Contents
 
@@ -19,7 +19,7 @@ elevatEd is an advanced learning platform that leverages Google Gemini's AI capa
 
 ## Overview
 
-elevatEd revolutionizes online learning by using AI to generate comprehensive courses on any topic. The platform creates dynamic, adaptive learning paths that respond to user interactions and adjust content difficulty based on performance. From beginners to advanced learners, elevatEd provides tailored educational experiences with interactive assessments, multimedia content, and real-time feedback.
+ElevatEd revolutionizes online learning by using AI to generate comprehensive courses on any topic. The platform creates dynamic, adaptive learning paths that respond to user interactions and adjust content difficulty based on performance. From beginners to advanced learners, ElevatEd provides tailored educational experiences with interactive assessments, multimedia content, and real-time feedback.
 
 ## Key Features
 
@@ -65,7 +65,7 @@ elevatEd revolutionizes online learning by using AI to generate comprehensive co
 
 ## Technology Stack
 
-elevatEd is built using modern web technologies:
+ElevatEd is built using modern web technologies:
 
 - **Frontend Framework**: Next.js 15.1.0 (React 19)
 - **Styling**: Tailwind CSS with custom theming
@@ -191,8 +191,8 @@ The platform includes a comprehensive UI component library in the `components/ui
 
 1. Clone the repository:
    ```bash
-   git clone https://github.com/yourusername/elevated.git
-   cd elevated
+   git clone https://github.com/yourusername/ElevatEd.git
+   cd ElevatEd
    ```
 
 2. Install dependencies:
@@ -245,7 +245,7 @@ The platform includes a comprehensive UI component library in the `components/ui
 
 ## Contributing
 
-We welcome contributions to elevatEd! Please follow these steps:
+We welcome contributions to ElevatEd! Please follow these steps:
 
 1. Fork the repository
 2. Create a feature branch: `git checkout -b feature/amazing-feature`

@@ -8,7 +8,7 @@ export default function Footer() {
         <div className="flex flex-col md:flex-row items-center justify-between">
           <div className="flex items-center mb-4 md:mb-0">
             <BookOpen className="h-6 w-6 text-purple-400 mr-2" />
-            <span className="text-xl font-bold text-white">elevatEd</span>
+            <span className="text-xl font-bold text-white">ElevatEd</span>
           </div>
           
           <nav className="mb-4 md:mb-0">

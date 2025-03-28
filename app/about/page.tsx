@@ -22,7 +22,7 @@ export default function AboutPage() {
             <div className="flex items-center">
               <div className="flex items-center">
                 <BookOpen className="h-6 w-6 text-purple-600 dark:text-purple-400 mr-2" />
-                <span className="text-xl font-bold text-slate-900 dark:text-white">elevatEd</span>
+                <span className="text-xl font-bold text-slate-900 dark:text-white">ElevatEd</span>
               </div>
               <div className="hidden md:flex ml-10 space-x-8">
                 <Link href="/features" className="text-slate-600 dark:text-slate-300 hover:text-purple-600 dark:hover:text-purple-400 transition-colors">
@@ -107,7 +107,7 @@ export default function AboutPage() {
             </h1>
 
             <p className="text-lg md:text-xl text-slate-600 dark:text-slate-300 mb-8">
-              elevatEd is on a mission to democratize education by making personalized, 
+              ElevatEd is on a mission to democratize education by making personalized, 
               high-quality learning experiences accessible to everyone through the power of AI.
             </p>
           </div>
@@ -148,7 +148,7 @@ export default function AboutPage() {
                 Our Mission
               </div>
               <h2 className="text-3xl md:text-4xl font-bold mb-6 text-slate-900 dark:text-white animate-fade-in">
-                Why We Built <span className="text-transparent bg-clip-text bg-gradient-to-r from-purple-600 to-blue-500 dark:from-purple-400 dark:to-blue-400">elevatEd</span>
+                Why We Built <span className="text-transparent bg-clip-text bg-gradient-to-r from-purple-600 to-blue-500 dark:from-purple-400 dark:to-blue-400">ElevatEd</span>
               </h2>
               <div className="space-y-6 text-lg text-slate-600 dark:text-slate-300">
                 <p className="animate-fade-in-up" style={{ animationDelay: "100ms" }}>
@@ -166,7 +166,7 @@ export default function AboutPage() {
                   background, and goals.
                 </p>
                 <p className="animate-fade-in-up" style={{ animationDelay: "400ms" }}>
-                  Today, elevatEd is making this vision a reality—democratizing access to personalized 
+                  Today, ElevatEd is making this vision a reality—democratizing access to personalized 
                   education for learners around the world, regardless of their location or circumstances.
                 </p>
               </div>
@@ -211,7 +211,7 @@ export default function AboutPage() {
               Powered by <span className="text-transparent bg-clip-text bg-gradient-to-r from-amber-500 to-red-500 dark:from-amber-400 dark:to-red-400">Google Gemini</span>
             </h2>
             <p className="text-lg text-slate-600 dark:text-slate-300 max-w-2xl mx-auto">
-              elevatEd leverages Google's most advanced AI technology to create learning experiences 
+              ElevatEd leverages Google's most advanced AI technology to create learning experiences 
               that adapt to your unique needs.
             </p>
           </div>
@@ -254,7 +254,7 @@ export default function AboutPage() {
                       
                       <div className="overflow-x-auto custom-scrollbar">
                         <pre className="text-sm leading-relaxed">
-<code>{`// elevatEd AI - Course Generation Algorithm
+<code>{`// ElevatEd AI - Course Generation Algorithm
 async function generatePersonalizedCourse(topic, userLevel, preferences) {
   // Initialize Gemini Pro model with advanced settings
   const model = await GeminiModel.initialize({
@@ -320,24 +320,24 @@ async function generatePersonalizedCourse(topic, userLevel, preferences) {
               What Our Users Say
             </h2>
             <p className="text-lg text-slate-600 dark:text-slate-300 max-w-2xl mx-auto">
-              Discover how elevatEd is transforming learning experiences for students and educators worldwide.
+              Discover how ElevatEd is transforming learning experiences for students and educators worldwide.
             </p>
           </div>
 
           <div className="grid grid-cols-1 md:grid-cols-3 gap-8">
             {[
               {
-                quote: "elevatEd completely changed how I approach learning new subjects. The personalized courses feel like they were crafted just for me.",
+                quote: "ElevatEd completely changed how I approach learning new subjects. The personalized courses feel like they were crafted just for me.",
                 author: "Jamie Chen",
                 role: "Software Developer"
               },
               {
-                quote: "As an educator, elevatEd has been a game-changer. I can now provide tailored resources for each of my students with minimal effort.",
+                quote: "As an educator, ElevatEd has been a game-changer. I can now provide tailored resources for each of my students with minimal effort.",
                 author: "Dr. Marcus Johnson",
                 role: "University Professor"
               },
               {
-                quote: "I've tried many learning platforms, but nothing compares to how elevatEd adapts to my learning style and pace.",
+                quote: "I've tried many learning platforms, but nothing compares to how ElevatEd adapts to my learning style and pace.",
                 author: "Sofia Rodriguez",
                 role: "Medical Student"
               }
@@ -402,7 +402,7 @@ async function generatePersonalizedCourse(topic, userLevel, preferences) {
           <div className="max-w-3xl mx-auto">
             <h2 className="text-3xl md:text-4xl font-bold mb-6 text-white">Ready to Join Our Mission?</h2>
             <p className="text-xl mb-10 text-white/90">
-              Experience the future of learning with elevatEd and help us 
+              Experience the future of learning with ElevatEd and help us 
               democratize access to personalized education.
             </p>
             
@@ -429,7 +429,7 @@ async function generatePersonalizedCourse(topic, userLevel, preferences) {
 
           <div className="border-t border-slate-800 mt-8 pt-8 flex flex-col md:flex-row justify-between items-center">
             <p className="text-sm text-slate-500">
-              © {new Date().getFullYear()} elevatEd. All rights reserved.
+              © {new Date().getFullYear()} ElevatEd. All rights reserved.
             </p>
             <div className="mt-4 md:mt-0">
               <div className="flex items-center space-x-2 text-sm text-slate-500">
@@ -476,7 +476,7 @@ const teamMembers = [
   {
     name: "Michael Rodriguez",
     role: "CTO",
-    bio: "Ex-Meta engineer who led the development of adaptive learning systems. Brings 15+ years of experience in AI and machine learning to elevatEd."
+    bio: "Ex-Meta engineer who led the development of adaptive learning systems. Brings 15+ years of experience in AI and machine learning to ElevatEd."
   },
   {
     name: "Aisha Patel",
@@ -496,7 +496,7 @@ const teamMembers = [
   {
     name: "David Okafor",
     role: "Head of Partnerships",
-    bio: "Builds strategic relationships with educational institutions, corporations, and nonprofits to expand access to elevatEd."
+    bio: "Builds strategic relationships with educational institutions, corporations, and nonprofits to expand access to ElevatEd."
   }
 ];
 

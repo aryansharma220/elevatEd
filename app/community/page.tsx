@@ -39,7 +39,7 @@ export default function CommunityPage() {
                 <Link href="/">
                   <div className="flex items-center">
                     <BookOpen className="h-6 w-6 text-purple-600 dark:text-purple-400 mr-2" />
-                    <span className="text-xl font-bold text-slate-900 dark:text-white">elevatEd</span>
+                    <span className="text-xl font-bold text-slate-900 dark:text-white">ElevatEd</span>
                   </div>
                 </Link>
               </div>
@@ -131,7 +131,7 @@ export default function CommunityPage() {
               <Users className="h-10 w-10 text-white" />
             </div>
             <h1 className="text-3xl md:text-5xl font-bold text-slate-900 dark:text-white mb-4">
-              elevatEd Community
+              ElevatEd Community
             </h1>
             <p className="text-lg md:text-xl text-slate-600 dark:text-slate-300 max-w-3xl mx-auto mb-8">
               Connect with learners from around the world, share insights, and enhance your learning journey through collaborative discussion
@@ -237,7 +237,7 @@ export default function CommunityPage() {
           
           <div className="border-t border-slate-800 mt-8 pt-8 flex flex-col md:flex-row justify-between items-center">
             <p className="text-sm text-slate-500">
-              © {new Date().getFullYear()} elevatEd. All rights reserved.
+              © {new Date().getFullYear()} ElevatEd. All rights reserved.
             </p>
             <div className="mt-4 md:mt-0">
               <div className="flex items-center space-x-2 text-sm text-slate-500">

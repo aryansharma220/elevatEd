@@ -58,7 +58,7 @@ export default function PricesPage() {
             <div className="flex items-center">
               <Link href="/" className="flex items-center">
                 <BookOpen className="h-6 w-6 text-purple-600 dark:text-purple-400 mr-2" />
-                <span className="text-xl font-bold text-slate-900 dark:text-white">elevatEd</span>
+                <span className="text-xl font-bold text-slate-900 dark:text-white">ElevatEd</span>
               </Link>
               <div className="hidden md:flex ml-10 space-x-8">
                 <Link href="/features" className="text-slate-600 dark:text-slate-300 hover:text-purple-600 dark:hover:text-purple-400 transition-colors">
@@ -191,7 +191,7 @@ export default function PricesPage() {
           
           <div className="border-t border-slate-800 mt-8 pt-8 flex flex-col md:flex-row justify-between items-center">
             <p className="text-sm text-slate-500">
-              © {new Date().getFullYear()} elevatEd. All rights reserved.
+              © {new Date().getFullYear()} ElevatEd. All rights reserved.
             </p>
             <div className="mt-4 md:mt-0">
               <div className="flex items-center space-x-2 text-sm text-slate-500">
