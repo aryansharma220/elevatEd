@@ -108,8 +108,8 @@ export default function FeaturesPage() {
                 </svg>
               </span>
             </h1>
-            <p className="text-xl text-slate-600 dark:text-slate-300 max-w-2xl mx-auto">
-              Explore how CourseGemini transforms education with cutting-edge AI technology, delivering personalized learning experiences for everyone.
+            <p className="text-xl text-slate-600 dark:text-slate-300 leading-relaxed max-w-2xl mx-auto">
+              Explore how elevatEd transforms education with cutting-edge AI technology, delivering personalized learning experiences for everyone.
             </p>
           </div>
           
@@ -570,7 +570,7 @@ export default function FeaturesPage() {
           
           <div className="border-t border-slate-800 mt-8 pt-8 flex flex-col md:flex-row justify-between items-center">
             <p className="text-sm text-slate-500">
-              © {new Date().getFullYear()} CourseGemini. All rights reserved.
+              © {new Date().getFullYear()} elevatEd. All rights reserved.
             </p>
             <div className="mt-4 md:mt-0">
               <div className="flex items-center space-x-2 text-sm text-slate-500">

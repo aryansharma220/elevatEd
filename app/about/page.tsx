@@ -166,7 +166,7 @@ export default function AboutPage() {
                   background, and goals.
                 </p>
                 <p className="animate-fade-in-up" style={{ animationDelay: "400ms" }}>
-                  Today, CourseGemini is making this vision a reality—democratizing access to personalized 
+                  Today, elevatEd is making this vision a reality—democratizing access to personalized 
                   education for learners around the world, regardless of their location or circumstances.
                 </p>
               </div>
@@ -479,7 +479,7 @@ async function generatePersonalizedCourse(topic, userLevel, preferences) {
           
           <div className="border-t border-slate-800 mt-8 pt-8 flex flex-col md:flex-row justify-between items-center">
             <p className="text-sm text-slate-500">
-              © {new Date().getFullYear()} CourseGemini. All rights reserved.
+              © {new Date().getFullYear()} elevatEd. All rights reserved.
             </p>
             <div className="mt-4 md:mt-0">
               <div className="flex items-center space-x-2 text-sm text-slate-500">

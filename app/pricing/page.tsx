@@ -241,7 +241,7 @@ export default function PricesPage() {
           
           <div className="border-t border-slate-800 mt-8 pt-8 flex flex-col md:flex-row justify-between items-center">
             <p className="text-sm text-slate-500">
-              © {new Date().getFullYear()} CourseGemini. All rights reserved.
+              © {new Date().getFullYear()} elevatEd. All rights reserved.
             </p>
             <div className="mt-4 md:mt-0">
               <div className="flex items-center space-x-2 text-sm text-slate-500">
