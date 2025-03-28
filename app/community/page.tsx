@@ -12,10 +12,21 @@ import { Button } from "@/components/ui/button"
 import { Avatar, AvatarFallback, AvatarImage } from "@/components/ui/avatar"
 import { Badge } from "@/components/ui/badge"
 import { useState } from "react"
+import { usePathname } from "next/navigation"
 
 export default function CommunityPage() {
   const [activeTab, setActiveTab] = useState<string>("discussions");
   const [mobileMenuOpen, setMobileMenuOpen] = useState(false);
+  const pathname = usePathname();
+
+  // Fixed order of navigation links that won't change
+  const navLinks = [
+    { href: "/features", label: "Features" },
+    { href: "/pricing", label: "Pricing" },
+    { href: "/about", label: "About" },
+    { href: "/community", label: "Community" },
+  ];
+
 
   return (
     <div className="flex flex-col min-h-screen">
@@ -39,12 +50,13 @@ export default function CommunityPage() {
                 <Link href="/pricing" className="text-slate-600 dark:text-slate-300 hover:text-purple-600 dark:hover:text-purple-400 transition-colors">
                   Pricing
                 </Link>
-                <Link href="/community" className="text-purple-600 dark:text-purple-400 transition-colors">
-                  Community
-                </Link>
                 <Link href="/about" className="text-slate-600 dark:text-slate-300 hover:text-purple-600 dark:hover:text-purple-400 transition-colors">
                   About
                 </Link>
+                <Link href="/community" className="text-purple-600 dark:text-purple-400 transition-colors">
+                  Community
+                </Link>
+                
               </div>
             </div>
             <div className="hidden md:flex items-center space-x-4">
@@ -79,16 +91,17 @@ export default function CommunityPage() {
               <Star className="h-5 w-5 mr-3 opacity-70" />
               Pricing
             </Link>
+              <Link href="/about" className="block text-slate-600 dark:text-slate-300 hover:text-purple-600 dark:hover:text-purple-400 transition-colors
+              py-2 px-3 rounded-lg flex items-center hover:bg-purple-50 dark:hover:bg-purple-900/10">
+              <UserCheck className="h-5 w-5 mr-3 opacity-70" />
+              About
+            </Link>
             <Link href="/community" className="block text-purple-600 dark:text-purple-400 transition-colors
               py-2 px-3 rounded-lg flex items-center bg-purple-50 dark:bg-purple-900/10">
               <Users className="h-5 w-5 mr-3 opacity-70" />
               Community
             </Link>
-            <Link href="/about" className="block text-slate-600 dark:text-slate-300 hover:text-purple-600 dark:hover:text-purple-400 transition-colors
-              py-2 px-3 rounded-lg flex items-center hover:bg-purple-50 dark:hover:bg-purple-900/10">
-              <UserCheck className="h-5 w-5 mr-3 opacity-70" />
-              About
-            </Link>
+          
             <div className="pt-6 mt-6 border-t border-slate-200 dark:border-slate-700 flex flex-col space-y-3">
               <div className="bg-gradient-to-r from-purple-100 to-blue-100 dark:from-purple-900/20 dark:to-blue-900/20 p-4 rounded-lg mb-2">
                 <h4 className="font-medium text-purple-700 dark:text-purple-300 mb-1 flex items-center">
@@ -125,15 +138,15 @@ export default function CommunityPage() {
             </p>
             
             <div className="flex flex-wrap justify-center gap-3 mb-8">
-              <Badge className="px-3 py-1 text-sm bg-purple-100 dark:bg-purple-900/30 text-purple-800 dark:text-purple-300 border-none">
+              <Badge className="px-3 py-1 text-sm bg-purple-100 dark:bg-purple-900/30 text-purple-800 dark:text-purple-300 border-none  cursor-default">
                 <Globe className="h-3.5 w-3.5 mr-1" />
                 <span>7,500+ Members</span>
               </Badge>
-              <Badge className="px-3 py-1 text-sm bg-blue-100 dark:bg-blue-900/30 text-blue-800 dark:text-blue-300 border-none">
+              <Badge className="px-3 py-1 text-sm bg-blue-100 dark:bg-blue-900/30 text-blue-800 dark:text-blue-300 border-none  cursor-default">
                 <MessageSquare className="h-3.5 w-3.5 mr-1" />
                 <span>3,200+ Discussions</span>
               </Badge>
-              <Badge className="px-3 py-1 text-sm bg-green-100 dark:bg-green-900/30 text-green-800 dark:text-green-300 border-none">
+              <Badge className="px-3 py-1 text-sm bg-green-100 dark:bg-green-900/30 text-green-800 dark:text-green-300 border-none  cursor-default">
                 <Award className="h-3.5 w-3.5 mr-1" />
                 <span>120+ Countries</span>
               </Badge>

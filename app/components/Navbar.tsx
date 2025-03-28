@@ -4,6 +4,7 @@ import Link from "next/link"
 import { useState, useEffect } from "react"
 import { useTheme } from "next-themes"
 import { Button } from "@/components/ui/button"
+import { usePathname } from "next/navigation"  
 import {
   BookOpen,
   Layers,
@@ -26,7 +27,14 @@ export function Navbar() {
   useEffect(() => {
     setMounted(true)
   }, [])
+  const pathname = usePathname();
 
+ const navLinks = [
+  { href: "/features", label: "Features", icon: <Layers className="h-5 w-5" /> },
+  { href: "/pricing", label: "Pricing", icon: <Star className="h-5 w-5" /> },
+  { href: "/about", label: "About", icon: <UserCheck className="h-5 w-5" /> },
+  { href: "/community", label: "Community", icon: <MessageSquare className="h-5 w-5" /> },
+]  
   return (
     <nav className="bg-white/80 dark:bg-slate-900/80 backdrop-blur-sm fixed top-0 left-0 right-0 z-50 border-b border-slate-200 dark:border-slate-800">
       <div className="container mx-auto px-4">
@@ -39,8 +47,9 @@ export function Navbar() {
             <div className="hidden md:flex ml-10 space-x-8">
               <Link href="/features" className="text-slate-600 dark:text-slate-300 hover:text-purple-600 dark:hover:text-purple-400 transition-colors">Features</Link>
               <Link href="/pricing" className="text-slate-600 dark:text-slate-300 hover:text-purple-600 dark:hover:text-purple-400 transition-colors">Pricing</Link>
-              <Link href="/community" className="text-slate-600 dark:text-slate-300 hover:text-purple-600 dark:hover:text-purple-400 transition-colors">Community</Link>
+          
               <Link href="/about" className="text-slate-600 dark:text-slate-300 hover:text-purple-600 dark:hover:text-purple-400 transition-colors">About</Link>
+              <Link href="/community" className="text-slate-600 dark:text-slate-300 hover:text-purple-600 dark:hover:text-purple-400 transition-colors">Community</Link>
             </div>
           </div>
           <div className="hidden md:flex items-center space-x-4">
